@@ -14,5 +14,5 @@ This template is available under the CC0 license. Feel free to learn from it and
 
 ## Features
 
-To open the menu press g+c you cange this shortcut in Hotkeys
+To open the menu press g+c you cange this shortcut in Hotkeys.
 Each feature has its own description, I am not the best with English so surely there is a description that you do not understand, if you want me to change it, say it!
