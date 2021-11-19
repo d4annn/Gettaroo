@@ -1,8 +1,12 @@
-# Fabric Example Mod
+# Gettaroo Fabric mod 1.16
 
 ## Setup
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+You need Malilib and fabric api to use the mod
+
+https://github.com/maruohon/malilib
+https://www.curseforge.com/minecraft/mc-mods/fabric-api
+
 
 ## License
 
