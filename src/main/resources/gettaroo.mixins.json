@@ -1,0 +1,30 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "gettaroo.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "ClientBrandRetrieverMixin",
+    "ClientPlayerEntityMixin",
+    "EnderPearlItemMixin",
+    "EntityMixin",
+    "GameRendererMixin",
+    "HandledScreenMixin",
+    "InGameHudMixin",
+    "InGameOverlayRendererMixin",
+    "KeyboardInputMixin",
+    "LivingEntityMixin",
+    "MinecraftClientMixin",
+    "MiningToolItemMixin",
+    "PickaxeItemMixin",
+    "PlayerEntityMixin",
+    "PlayerInteractionManagerMixin",
+    "SlotMixin",
+    "WorldRendererMixin",
+    "EntityRenderDispatcherMixin",
+    "ItemEntityRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
