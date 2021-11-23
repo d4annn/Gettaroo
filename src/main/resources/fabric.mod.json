@@ -17,7 +17,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "gettaroo.Gettaroo"
+      "getta.gettaroo.Gettaroo"
     ]
   },
   "mixins": [

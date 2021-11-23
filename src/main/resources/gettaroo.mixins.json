@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "gettaroo.mixins",
+  "package": "getta.gettaroo.mixins",
   "compatibilityLevel": "JAVA_8",
   "client": [
     "ClientBrandRetrieverMixin",
