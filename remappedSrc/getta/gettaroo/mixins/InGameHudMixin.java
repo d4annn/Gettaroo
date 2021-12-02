@@ -52,7 +52,7 @@ public abstract class InGameHudMixin extends DrawableHelper {
 
             }
 
-//            if(FeatureToggle.NEAR_ENTITIES_RENDER.getBooleanValue()){
+            if(FeatureToggle.NEAR_ENTITIES_RENDER.getBooleanValue()){
 
 //                int type = checkEntitiesToRender(client);
 //
@@ -69,7 +69,7 @@ public abstract class InGameHudMixin extends DrawableHelper {
 //                    client.getTextureManager().bindTexture(new Identifier("getta.gettaroo:textures/steveFinal.png"));
 //                    Screen.drawTexture(matrices, x + 8, y - 50, 0, 0, 64, 64, 64, 64);
 //                }
-//            }
+            }
         }
     }
 

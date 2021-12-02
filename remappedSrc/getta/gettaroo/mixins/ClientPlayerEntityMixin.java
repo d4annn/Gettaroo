@@ -25,17 +25,17 @@ public abstract class ClientPlayerEntityMixin {
     @Shadow @Final protected MinecraftClient client;
 
 
-//    @Inject(method = "dropSelectedItem", at=@At("HEAD"), cancellable = true)
-//    public void cancelDrop(boolean dropEntireStack, CallbackInfoReturnable<Boolean> cir){
-//
-//        for (String item : Configs.Lists.PREVENT_DROPPING_LIST.getStrings()) {
-//
-//            if (Registry.ITEM.getId(client.player.getInventory().getStack(client.player.getInventory().selectedSlot).getItem()).equals(new Identifier(item))) {
-//
-//                cir.cancel();
-//            }
-//        }
-//    }
+    @Inject(method = "dropSelectedItem", at=@At("HEAD"), cancellable = true)
+    public void cancelDrop(boolean dropEntireStack, CallbackInfoReturnable<Boolean> cir){
+
+        for (String item : Configs.Lists.PREVENT_DROPPING_LIST.getStrings()) {
+
+            if (Registry.ITEM.getId(client.player.getInventory().getStack(client.player.getInventory().selectedSlot).getItem()).equals(new Identifier(item))) {
+
+                cir.cancel();
+            }
+        }
+    }
 
 @Shadow private boolean showsDeathScreen;
 
@@ -62,15 +62,15 @@ public abstract class ClientPlayerEntityMixin {
     @Inject(method = "tickMovement", at = @At("HEAD"))
     public void spider(CallbackInfo ci){
 
-//        if(Cheats.GIGAJUMP.getBooleanValue()) {
-//            if (client.player.isFallFlying()) {
-//                System.out.println("uhola");
-//                Vec3d velocity = client.player.getVelocity();
-//
-//                client.player.setVelocity(MovementSpeed.checkMovement(client.player).x, MovementSpeed.checkMovement(client.player).y, MovementSpeed.checkMovement(client.player).z );
-//
-//            }
-//        }
+        if(Cheats.GIGAJUMP.getBooleanValue()) {
+            if (client.player.isFallFlying()) {
+
+                Vec3d velocity = client.player.getVelocity();
+
+                client.player.setVelocity(MovementSpeed.checkMovement(client.player).x, MovementSpeed.checkMovement(client.player).y, MovementSpeed.checkMovement(client.player).z );
+
+            }
+        }
 
         if(Cheats.SPIDER.getBooleanValue()) {
 
@@ -99,7 +99,7 @@ public abstract class ClientPlayerEntityMixin {
                     && !isFallingFastEnoughToCauseDamage(player))
                 return;
 
-            player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(true));
+            player.networkHandler.sendPacket(new PlayerMoveC2SPacket(true));
         }
 
 

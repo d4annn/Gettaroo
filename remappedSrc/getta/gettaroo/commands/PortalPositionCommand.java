@@ -16,7 +16,7 @@ public class PortalPositionCommand {
     public static int current;
     public static boolean activated = false;
 
-/*
+
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher){
         dispatcher.register(ClientCommandManager.literal("portal")
                 .then(ClientCommandManager.literal("select")
@@ -28,8 +28,6 @@ public class PortalPositionCommand {
                 .then(ClientCommandManager.literal("remove")
                         .executes(context -> remove()))));
     }
-
- */
 
     public static int dos(){
         pos1 = new BlockPos(50, 50, 50);
@@ -55,20 +53,20 @@ public class PortalPositionCommand {
     }
 
     public static int add(){
-//        if(FeatureToggle.PORTAL_OUTSIDE_RENDER.getBooleanValue()){
-//            activated = true;
-//            return 1;
-//        }
+        if(FeatureToggle.PORTAL_OUTSIDE_RENDER.getBooleanValue()){
+            activated = true;
+            return 1;
+        }
         return 1;
     }
 
-//    public static int remove(){
-//        if(FeatureToggle.PORTAL_OUTSIDE_RENDER.getBooleanValue()){
-//            activated = false;
-//            return 1;
-//        }
-//        return 1;
-//    }
+    public static int remove(){
+        if(FeatureToggle.PORTAL_OUTSIDE_RENDER.getBooleanValue()){
+            activated = false;
+            return 1;
+        }
+        return 1;
+    }
 
     public static void changeCurrent(){
         if(current == 1){

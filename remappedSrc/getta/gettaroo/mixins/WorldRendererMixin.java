@@ -29,19 +29,19 @@ public abstract class WorldRendererMixin {
 
     @Inject(method = "render", at = @At("RETURN"))
     public void doBox(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo ci){
-//        if(FeatureToggle.PORTAL_OUTSIDE_RENDER.getBooleanValue() && PortalPositionCommand.activated) {
-//            OutlineVertexConsumerProvider vertexConsumers = MinecraftClient.getInstance().getBufferBuilders().getOutlineVertexConsumers();
-//
-//            BlockPos pos = PortalPositionCommand.pos1;
-//            BlockPos pos1 = PortalPositionCommand.pos2;
-//            Vec3d cam = client.cameraEntity.getPos();
-//
-//            matrices.push();
-//            matrices.translate(((double) pos.getX() - cam.getX()) * 2 , ((double) pos.getY() - cam.getY())*2 , ((double) pos.getZ() - cam.getZ()) * 2);
-//            matrices.translate(0, -1.5, 0); // leve superacion de la altura asignada
-//
-//            WorldRenderer.drawBox(matrices, vertexConsumers.getBuffer(RenderLayer.LINES), pos.getX(), pos.getY() , pos.getZ(), pos1.getX(), pos1.getY(), pos1.getZ(), 255, 0, 0, 1);
-//        }
+        if(FeatureToggle.PORTAL_OUTSIDE_RENDER.getBooleanValue() && PortalPositionCommand.activated) {
+            OutlineVertexConsumerProvider vertexConsumers = MinecraftClient.getInstance().getBufferBuilders().getOutlineVertexConsumers();
+
+            BlockPos pos = PortalPositionCommand.pos1;
+            BlockPos pos1 = PortalPositionCommand.pos2;
+            Vec3d cam = client.cameraEntity.getPos();
+
+            matrices.push();
+            matrices.translate(((double) pos.getX() - cam.getX()) * 2 , ((double) pos.getY() - cam.getY())*2 , ((double) pos.getZ() - cam.getZ()) * 2);
+            matrices.translate(0, -1.5, 0); // leve superacion de la altura asignada
+
+            WorldRenderer.drawBox(matrices, vertexConsumers.getBuffer(RenderLayer.LINES), pos.getX(), pos.getY() , pos.getZ(), pos1.getX(), pos1.getY(), pos1.getZ(), 255, 0, 0, 1);
+        }
     }
 }
 

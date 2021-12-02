@@ -58,12 +58,12 @@ public class Configs implements IConfigHandler {
 
     public static class Lists{
 
-//        public static final ConfigStringList PREVENT_DROPPING_LIST = new ConfigStringList("preventDroppList", ImmutableList.of(), "The items here won't be dropped");
+        public static final ConfigStringList PREVENT_DROPPING_LIST = new ConfigStringList("preventDroppList", ImmutableList.of(), "The items here won't be dropped");
         public static final ConfigStringList DISABLED_ENTITIES = new ConfigStringList("disabledEntities", ImmutableList.of(), "The entities in this list wont be rendered \n entities still there, they can attack you");
 
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
-//                PREVENT_DROPPING_LIST,
+                PREVENT_DROPPING_LIST,
                 DISABLED_ENTITIES
         );
     }

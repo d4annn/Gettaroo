@@ -1,6 +1,5 @@
 package getta.gettaroo.mixins;
 
-import getta.gettaroo.Gettaroo;
 import getta.gettaroo.config.Configs;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.player.PlayerInventory;
@@ -18,8 +17,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(HandledScreen.class)
 public class HandledScreenMixin {
-/*
+
     @Shadow @Nullable protected Slot focusedSlot;
+
+    @Shadow @Final protected PlayerInventory playerInventory;
 
     @Shadow protected int y;
 
@@ -35,13 +36,11 @@ public class HandledScreenMixin {
 
         for (String item : Configs.Lists.PREVENT_DROPPING_LIST.getStrings()){
 
-            if(Registry.ITEM.getId(Gettaroo.mc.player.getInventory().getStack(((SlotMixin)focusedSlot).getIndex()).getItem()).equals(new Identifier(item))){
+            if(Registry.ITEM.getId(playergetInventory().getStack(((SlotMixin)focusedSlot).getIndex()).getItem()).equals(new Identifier(item))){
 
                 cir.cancel();
             }
         }
     }
-
- */
 }
 

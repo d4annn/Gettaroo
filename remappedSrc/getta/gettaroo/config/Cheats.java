@@ -15,25 +15,12 @@ import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
 import fi.dy.masa.malilib.util.StringUtils;
 import getta.gettaroo.Gettaroo;
 
-public enum FeatureToggle implements IHotkeyTogglable, IConfigNotifiable<IConfigBoolean>{
+public enum Cheats implements IHotkeyTogglable, IConfigNotifiable<IConfigBoolean> {
 
-    GRAVITY_ON_LAVA("gravityInLava", false, "", "When you are in lava you have incremented gravity"),
-    GRAVITY_ON_WATER("murcianMode", false, "", "When you are in water you have incremented gravity"),
-    SHOW_DEATH_SCREEN("dontShowDeathScreen", false, "", "When you die death screen isn't showed"),
-    FAST_SHIFT("fastShift", false, "", "When you shift your speed isn't reduced"),
-    STOP_IN_AIR("stopInAir", false, "", "Toggle of the hotkey of the key"),
-//    CLIENT_NAME("changeClientName", false, "", "Changes the name of your client"),
-    WINDOW_NAME("changeWindowName", false, "", "Changes the name of your window"),
-    CUSTOM_SCOREBOARD("customScoreBoard", false, "", "Look at utils"),
-    HIDE_SCOREBOARD("hideScoreBoard", false, "", "Hides the scoreboard"),
-    AUTO_RUN("autoRun", false, "", "When u are walking and you press this key you will auto walk/run"),
-//    LOCK_SLOT_ANTI_CHEAT("lockSlotCheaty", false, "", "If you use this with an anticheat you will get kick"),
-    WEATHER_RENDERER("disableWeatherRender", false, "", "Disables the render of weather"),
-//    PORTAL_OUTSIDE_RENDER("portalOutsideRender", false, "", "Portal"),
-//    NEAR_ENTITIES_RENDER("nearEntitiesRender", false, "", "Renders an icon of the nearest entities"),
-    DISABLE_RENDERING_ENTITIES("disableRenderingSelectedEntities", false, "", "pito"),
-    FIRE_BETTER_RENDER("betterFireRender", false, "", "Disables the fire render and adds a number for the time that you are in fire \n change the postion at utils"),
-    DISABLE_DAMAGE_SHAKE("disableDamageShake", false, "", "Disables the shake that you recieve when you take damage");
+    SPIDER("spider", false, "", "You can climb walls"),
+    GIGAJUMP("gigaJump", false, "", "yes, fly"),
+    FALL_DAMAGE("removeFallDamage", false, "", "Removes the fall damage");
+
 
     private final String name;
     private final String comment;
@@ -44,37 +31,37 @@ public enum FeatureToggle implements IHotkeyTogglable, IConfigNotifiable<IConfig
     private boolean valueBoolean;
     private IValueChangeCallback<IConfigBoolean> callback;
 
-    private FeatureToggle(String name, boolean defaultValue, String defaultHotkey, String comment)
+    private Cheats(String name, boolean defaultValue, String defaultHotkey, String comment)
     {
         this(name, defaultValue, false, defaultHotkey, KeybindSettings.DEFAULT, comment);
     }
 
-    private FeatureToggle(String name, boolean defaultValue, boolean singlePlayer, String defaultHotkey, String comment)
+    private Cheats(String name, boolean defaultValue, boolean singlePlayer, String defaultHotkey, String comment)
     {
         this(name, defaultValue, singlePlayer, defaultHotkey, KeybindSettings.DEFAULT, comment);
     }
 
-    private FeatureToggle(String name, boolean defaultValue, String defaultHotkey, KeybindSettings settings, String comment)
+    private Cheats(String name, boolean defaultValue, String defaultHotkey, KeybindSettings settings, String comment)
     {
         this(name, defaultValue, false, defaultHotkey, settings, comment);
     }
 
-    private FeatureToggle(String name, boolean defaultValue, boolean singlePlayer, String defaultHotkey, KeybindSettings settings, String comment)
+    private Cheats(String name, boolean defaultValue, boolean singlePlayer, String defaultHotkey, KeybindSettings settings, String comment)
     {
         this(name, defaultValue, singlePlayer, defaultHotkey, settings, comment, StringUtils.splitCamelCase(name.substring(5)));
     }
 
-    private FeatureToggle(String name, boolean defaultValue, String defaultHotkey, String comment, String prettyName)
+    private Cheats(String name, boolean defaultValue, String defaultHotkey, String comment, String prettyName)
     {
         this(name, defaultValue, false, defaultHotkey, comment, prettyName);
     }
 
-    private FeatureToggle(String name, boolean defaultValue, boolean singlePlayer, String defaultHotkey, String comment, String prettyName)
+    private Cheats(String name, boolean defaultValue, boolean singlePlayer, String defaultHotkey, String comment, String prettyName)
     {
         this(name, defaultValue, singlePlayer, defaultHotkey, KeybindSettings.DEFAULT, comment, prettyName);
     }
 
-    private FeatureToggle(String name, boolean defaultValue, boolean singlePlayer, String defaultHotkey, KeybindSettings settings, String comment, String prettyName)
+    private Cheats(String name, boolean defaultValue, boolean singlePlayer, String defaultHotkey, KeybindSettings settings, String comment, String prettyName)
     {
         this.name = name;
         this.valueBoolean = defaultValue;
@@ -238,6 +225,5 @@ public enum FeatureToggle implements IHotkeyTogglable, IConfigNotifiable<IConfig
             Gettaroo.logger.warn("Failed to set config value for '{}' from the JSON element '{}'", this.getName(), element, e);
         }
     }
-
 
 }
