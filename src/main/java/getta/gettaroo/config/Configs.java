@@ -13,6 +13,7 @@ import getta.gettaroo.References;
 import getta.gettaroo.utils.ColorUtils;
 import getta.gettaroo.utils.DirectionUtils;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.player.PlayerEntity;
 
 import java.io.File;
 
@@ -25,8 +26,6 @@ public class Configs implements IConfigHandler {
         public static final ConfigString CLIENT_NAME = new ConfigString("clientName", "", "Changes the name of your client");
         public static final ConfigString WINDOW_NAME = new ConfigString("windowName", "", "Changes the name of your window");
         public static final ConfigOptionList AUTO_MOVEMENT_DIRECTION = new ConfigOptionList("autoMovementDirection", DirectionUtils.FORWARD, "The movement the auto movement will go");
-        public static final ConfigInteger SCOREBOARD_X_POSITION = new ConfigInteger("scoreBoardXPosition", 900, 1, 905, "The x position of your scoreboard");
-        public static final ConfigInteger SCOREBOARD_Y_POSITION = new ConfigInteger("scoreBoardYPosition", 250, 30, 500,"The Y position of your scoreboard");
         public static final ConfigOptionList SCOREBOARD_OBJECTIVE_COLOR = new ConfigOptionList("scoreBoardObjectiveColor", ColorUtils.WHITE, "The color of the objective");
         public static final ConfigOptionList SCOREBOARD_SCORE_COLOR = new ConfigOptionList("scoreBoardScoreColor", ColorUtils.WHITE, "The color of the score");
 
@@ -35,8 +34,6 @@ public class Configs implements IConfigHandler {
                 CLIENT_NAME,
                 WINDOW_NAME,
                 AUTO_MOVEMENT_DIRECTION,
-                SCOREBOARD_X_POSITION,
-                SCOREBOARD_Y_POSITION,
                 SCOREBOARD_OBJECTIVE_COLOR,
                 SCOREBOARD_SCORE_COLOR
         );

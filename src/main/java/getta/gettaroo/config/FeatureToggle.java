@@ -24,7 +24,6 @@ public enum FeatureToggle implements IHotkeyTogglable, IConfigNotifiable<IConfig
     STOP_IN_AIR("stopInAir", false, "", "Toggle of the hotkey of the key"),
     CLIENT_NAME("changeClientName", false, "", "Changes the name of your client"),
     WINDOW_NAME("changeWindowName", false, "", "Changes the name of your window"),
-    CUSTOM_SCOREBOARD("customScoreBoard", false, "", "Look at utils"),
     HIDE_SCOREBOARD("hideScoreBoard", false, "", "Hides the scoreboard"),
     AUTO_RUN("autoRun", false, "", "When u are walking and you press this key you will auto walk/run"),
     LOCK_SLOT_ANTI_CHEAT("lockSlotCheaty", false, "", "If you use this with an anticheat you will get kick"),

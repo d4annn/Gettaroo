@@ -21,6 +21,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PlayerEntityMixin {
 
 
+@Inject(method = "updateWaterSubmersionState", at = @At("HEAD"), cancellable = true)
+public void waterTrolling(CallbackInfoReturnable<Boolean> cir){
+    if(FeatureToggle.GRAVITY_ON_WATER.getBooleanValue()) {
+        cir.setReturnValue(false);
+    }
+}
+
+    @Inject(method = "updateSwimming", at = @At("HEAD"),cancellable = true)
+    public void waterTrolling1(CallbackInfo ci){
+        if(FeatureToggle.GRAVITY_ON_WATER.getBooleanValue()) {
+            ci.cancel();
+        }
+    }
+
+    @Inject(method = "onSwimmingStart", at = @At("HEAD"),cancellable = true)
+    public void waterTrolling12(CallbackInfo ci){
+        if(FeatureToggle.GRAVITY_ON_WATER.getBooleanValue()) {
+            ci.cancel();
+        }
+    }
+
     @Inject(method = "isSwimming", at = @At("HEAD"), cancellable = true)
     public void isSwimming(CallbackInfoReturnable<Boolean> cir){
         if(FeatureToggle.GRAVITY_ON_WATER.getBooleanValue()){
