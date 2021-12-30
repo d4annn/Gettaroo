@@ -15,7 +15,6 @@ public class ClientBrandRetrieverMixin {
     private static void getClient(CallbackInfoReturnable<String> cir){
         if(FeatureToggle.CLIENT_NAME.getBooleanValue()) {
             cir.setReturnValue(Configs.Utils.CLIENT_NAME.getStringValue());
-            cir.cancel();
         }
     }
 }

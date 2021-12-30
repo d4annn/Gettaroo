@@ -46,7 +46,6 @@ public void waterTrolling(CallbackInfoReturnable<Boolean> cir){
     public void isSwimming(CallbackInfoReturnable<Boolean> cir){
         if(FeatureToggle.GRAVITY_ON_WATER.getBooleanValue()){
             cir.setReturnValue(false);
-            cir.cancel();
         }
     }
 
@@ -92,7 +91,6 @@ public void waterTrolling(CallbackInfoReturnable<Boolean> cir){
                     f /= 75.0F;
                 }
                 cir.setReturnValue(f);
-                cir.cancel();
             }
         }
     }

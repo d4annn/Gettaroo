@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = PickaxeItem.class, priority = 1100)
 public class PickaxeItemMixin extends MiningToolItemMixin{
 
-
     @Override
     public void miningSpeedHandler(ItemStack stack, BlockState state, CallbackInfoReturnable<Float> cir) {
       Material material = state.getMaterial();

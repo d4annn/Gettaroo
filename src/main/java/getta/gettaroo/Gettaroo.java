@@ -16,7 +16,7 @@ public class Gettaroo implements ClientModInitializer {
     public void registerCommmands(){
         logger.info("registerCommand(): Command registration initialized");
         PortalPositionCommand.register(ClientCommandManager.DISPATCHER);
-//        LockSlotCommand.register(ClientCommandManager.DISPATCHER);
+
     }
 
     @Override
@@ -26,8 +26,6 @@ public class Gettaroo implements ClientModInitializer {
 
         //register all commands and keybinds
         registerCommmands();
-
-//        LockSlotCommand.updateList();
 
         logger.info("onInitializeClient(): Mod initialized");
     }

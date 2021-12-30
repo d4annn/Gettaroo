@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class SwimNavigationMixin {
 
     @Inject(method = "isAtValidPosition", at = @At("HEAD"),cancellable = true)
-    public void doSOmething(CallbackInfoReturnable<Boolean> cir){
+    public void doSomething(CallbackInfoReturnable<Boolean> cir){
         cir.setReturnValue(false);
     }
 

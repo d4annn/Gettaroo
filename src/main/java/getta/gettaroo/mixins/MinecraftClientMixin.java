@@ -18,17 +18,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin {
 
-    @Shadow @Final private Window window;
-
-    @Shadow public abstract ClientBuiltinResourcePackProvider getResourcePackDownloader();
-
-    @Shadow @Final private static Logger LOGGER;
-
     @Inject(method = "getWindowTitle", at = @At("HEAD"),cancellable = true)
     public void changeWindowTittle(CallbackInfoReturnable<String> cir){
         if(FeatureToggle.WINDOW_NAME.getBooleanValue()) {
             cir.setReturnValue(Configs.Utils.WINDOW_NAME.getStringValue());
-            cir.cancel();
         }
     }
 }

@@ -49,26 +49,6 @@ public abstract class InGameHudMixin extends DrawableHelper {
 
                     client.getTextureManager().bindTexture(new Identifier("gettaroo:textures/fire1.png"));
                     Screen.drawTexture(matrices, x + 8, y + 14, 0, 0, 32, 32, 32, 32);
-
-            }
-
-            if(FeatureToggle.NEAR_ENTITIES_RENDER.getBooleanValue()){
-
-//                int type = checkEntitiesToRender(client);
-//
-//                if(type == 0){
-//                    client.getTextureManager().bindTexture(new Identifier("getta.gettaroo:textures/zombieFinal.png"));
-//                    Screen.drawTexture(matrices, x + 8, y - 50, 0, 0, 64, 64, 64, 64);
-//                }else if(type == 1){
-//                    client.getTextureManager().bindTexture(new Identifier("getta.gettaroo:textures/cow.png"));
-//                    Screen.drawTexture(matrices, x + 8, y - 50, 0, 0, 64, 64, 64, 64);
-//                }else if(type == 2){
-//                    client.getTextureManager().bindTexture(new Identifier("getta.gettaroo:textures/stickFinal.png"));
-//                    Screen.drawTexture(matrices, x + 8, y - 50, 0, 0, 64, 64, 64, 64);
-//                }else if(type == 3){
-//                    client.getTextureManager().bindTexture(new Identifier("getta.gettaroo:textures/steveFinal.png"));
-//                    Screen.drawTexture(matrices, x + 8, y - 50, 0, 0, 64, 64, 64, 64);
-//                }
             }
         }
     }
@@ -78,34 +58,6 @@ public abstract class InGameHudMixin extends DrawableHelper {
         if(FeatureToggle.HIDE_SCOREBOARD.getBooleanValue()){
             ci.cancel();
         }
-    }
-
-    private static int k = 0;
-
-    private static int checkEntitiesToRender(MinecraftClient client){
-        k++;
-        if(k == 150) {
-            k = 0;
-            if (!isHostileRendered && !isNoHostileRendered && !isItemRendered) {
-                for (Entity entity : client.player.clientWorld.getEntities()) {
-
-                    for(HostileEntities entities : HostileEntities.values()){
-                        if(entity.getName().getString().equalsIgnoreCase(entities.getName())){
-                            return 0;
-                        }
-                    }for(NeutralEntities entities : NeutralEntities.values()){
-                        if(entity.getName().getString().equalsIgnoreCase(entities.getName())){
-                            return 1;
-                        }
-                    }if(entity.getType().equals(EntityType.ITEM)){
-                        return 2;
-                    }else if(entity.getType().equals(EntityType.PLAYER)){
-                        return 3;
-                    }
-                }
-            }
-        }
-        return 5;
     }
 }
 

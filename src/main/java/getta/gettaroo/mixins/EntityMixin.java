@@ -21,7 +21,6 @@ public abstract class EntityMixin{
    public void isInLava(CallbackInfoReturnable<Boolean> cir){
         if(Configs.Server.LAVA_DOESNT_EXIST.getBooleanValue()) {
             cir.setReturnValue(false);
-            cir.cancel();
         }
    }
 
@@ -51,19 +50,11 @@ public abstract class EntityMixin{
         }
     }
 
-//   @Inject(method = "shouldLeaveSwimmingPose", at = @At("HEAD"),cancellable = true)
-//   public void waterTrolling(CallbackInfoReturnable<Boolean> cir){
-//       if(FeatureToggle.GRAVITY_ON_WATER.getBooleanValue()) {
-//           cir.setReturnValue(true);
-//       }
-//   }
-
 
    @Inject(method = "isTouchingWater", at = @At("HEAD"), cancellable = true)
    public void isTouchingWater(CallbackInfoReturnable<Boolean> cir){
         if(FeatureToggle.GRAVITY_ON_WATER.getBooleanValue()) {
             cir.setReturnValue(false);
-            cir.cancel();
         }
     }
 

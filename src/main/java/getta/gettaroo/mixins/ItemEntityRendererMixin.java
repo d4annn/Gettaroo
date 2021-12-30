@@ -20,8 +20,7 @@ public class ItemEntityRendererMixin {
     public void stopRenderingItemEntity(ItemEntity itemEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci){
         if(FeatureToggle.DISABLE_RENDERING_ENTITIES.getBooleanValue()) {
             for (String item : Configs.Lists.DISABLED_ENTITIES.getStrings()) {
-                System.out.println(Registry.ITEM.getId(itemEntity.getStack().getItem()));
-                System.out.println(new Identifier(item));
+
                 if (Registry.ITEM.getId(itemEntity.getStack().getItem()).equals(new Identifier(item))) {
                     ci.cancel();
                 }

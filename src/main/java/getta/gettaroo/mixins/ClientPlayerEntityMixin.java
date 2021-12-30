@@ -48,7 +48,6 @@ public abstract class ClientPlayerEntityMixin {
     public void shouldSlowDown(CallbackInfoReturnable<Boolean> cir){
         if(FeatureToggle.FAST_SHIFT.getBooleanValue()) {
             cir.setReturnValue(false);
-            cir.cancel();
         }
     }
 
@@ -101,42 +100,12 @@ public abstract class ClientPlayerEntityMixin {
 
             player.networkHandler.sendPacket(new PlayerMoveC2SPacket(true));
         }
-
-
     }
 
     private boolean isFallingFastEnoughToCauseDamage(ClientPlayerEntity player)
     {
         return player.getVelocity().y < -0.5;
     }
-/*
-    @Inject(method = "tick", at = @At("HEAD"))
-    public void lockHand(CallbackInfo ci){
-        List<LockSlotList.LockSlot> list = LockSlotCommand.readJsonLock().getList();
-
-        ScreenHandler container = client.player.playerScreenHandler;
-        for(LockSlotList.LockSlot item : list){
-
-            if(client.player.inventory.getStack(item.getSlot()).getItem() != Registry.ITEM.get(new Identifier(item.getItem()))){
-
-                if(!client.player.inventory.getMainHandStack().equals(Registry.ITEM.get(new Identifier(item.getItem())).getDefaultStack())) {
-
-                    if (client.player.inventory.getSlotWithStack(Registry.ITEM.get(new Identifier(item.getItem())).getDefaultStack()) != -1) {
-
-                        int slotInv = client.player.inventory.getSlotWithStack(Registry.ITEM.get(new Identifier(item.getItem())).getDefaultStack());
-                        Slot slot = container.getSlot(slotInv);
-
-                        client.interactionManager.clickSlot(container.syncId, ((SlotMixin) slot).getIndex(), item.getSlot(), SlotActionType.SWAP, client.player);
-
-                    }
-                }
-            }
-        }
-    }
-
-
-
- */
 }
 
 
