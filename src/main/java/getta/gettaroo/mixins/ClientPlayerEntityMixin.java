@@ -5,8 +5,11 @@ import getta.gettaroo.config.Configs;
 import getta.gettaroo.config.FeatureToggle;
 import getta.gettaroo.features.MovementSpeed;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.options.ControlsListWidget;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
@@ -67,7 +70,6 @@ public abstract class ClientPlayerEntityMixin {
                 Vec3d velocity = client.player.getVelocity();
 
                 client.player.setVelocity(MovementSpeed.checkMovement(client.player).x, MovementSpeed.checkMovement(client.player).y, MovementSpeed.checkMovement(client.player).z );
-
             }
         }
 

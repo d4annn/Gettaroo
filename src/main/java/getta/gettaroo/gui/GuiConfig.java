@@ -9,7 +9,7 @@ import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import fi.dy.masa.malilib.util.StringUtils;
-import getta.gettaroo.References;
+import getta.gettaroo.Constants;
 import getta.gettaroo.config.Cheats;
 import getta.gettaroo.config.Configs;
 import getta.gettaroo.config.FeatureToggle;
@@ -24,7 +24,7 @@ public class GuiConfig extends GuiConfigsBase {
 
     public GuiConfig()
     {
-        super(10, 50, References.MOD_ID, null, "getta.gettaroo.gui.title.configs");
+        super(10, 50, Constants.MOD_ID, null, "getta.gettaroo.gui.title.configs");
     }
 
     @Override

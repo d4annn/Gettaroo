@@ -9,11 +9,11 @@ import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.config.options.*;
 import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
-import getta.gettaroo.References;
+import getta.gettaroo.Constants;
 import getta.gettaroo.utils.ColorUtils;
 import getta.gettaroo.utils.DirectionUtils;
+import getta.gettaroo.utils.RowUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.player.PlayerEntity;
 
 import java.io.File;
 
@@ -28,6 +28,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigOptionList AUTO_MOVEMENT_DIRECTION = new ConfigOptionList("autoMovementDirection", DirectionUtils.FORWARD, "The movement the auto movement will go");
         public static final ConfigOptionList SCOREBOARD_OBJECTIVE_COLOR = new ConfigOptionList("scoreBoardObjectiveColor", ColorUtils.WHITE, "The color of the objective");
         public static final ConfigOptionList SCOREBOARD_SCORE_COLOR = new ConfigOptionList("scoreBoardScoreColor", ColorUtils.WHITE, "The color of the score");
+        public static final ConfigOptionList CUSTOM_SWAP_ROW = new ConfigOptionList("customSwapRow", RowUtils.ROW_2, "The row you move set to default to use the other ones");
 
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
@@ -35,7 +36,8 @@ public class Configs implements IConfigHandler {
                 WINDOW_NAME,
                 AUTO_MOVEMENT_DIRECTION,
                 SCOREBOARD_OBJECTIVE_COLOR,
-                SCOREBOARD_SCORE_COLOR
+                SCOREBOARD_SCORE_COLOR,
+                CUSTOM_SWAP_ROW
         );
     }
 
@@ -44,7 +46,6 @@ public class Configs implements IConfigHandler {
         public static final ConfigStringList INSTA_MINE_BLOCKS = new ConfigStringList("instaMineBlocks", ImmutableList.of(), "§4ONLY FOR SERVER \n §rThe blocks in this list will be instamined");
         public static final ConfigBoolean ENDERPEARL_NO_COOLDOWN = new ConfigBoolean("enderPearlNoCooldown", false, "§4ONLY FOR SERVER \n §rWhen you throw an ender pearl, theres no cooldown :D");
         public static final ConfigBoolean LAVA_DOESNT_EXIST = new ConfigBoolean("lavaDoesntExist", false, "§4ONLY FOR SERVER \n  §rDisables the lava in your survival");
-
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
                 INSTA_MINE_BLOCKS,
@@ -65,7 +66,7 @@ public class Configs implements IConfigHandler {
         );
     }
 
-    private static final String CONFIG_FILE_NAME = References.MOD_ID + ".json";
+    private static final String CONFIG_FILE_NAME = Constants.MOD_ID + ".json";
     private static final int CONFIG_VERSION = 1;
 
     public void loadFromFile() {

@@ -7,10 +7,12 @@ import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
 import fi.dy.masa.malilib.interfaces.IClientTickHandler;
 import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
+import getta.gettaroo.features.InventorySwapRow;
 import getta.gettaroo.gui.GuiConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.screen.slot.SlotActionType;
 
 public class Callbacks implements IClientTickHandler {
 
@@ -22,6 +24,9 @@ public class Callbacks implements IClientTickHandler {
 
         Hotkeys.OPEN_CONFIG_GUI.getKeybind().setCallback(callbackGeneric);
         Hotkeys.FAST_DISCONNECT.getKeybind().setCallback(callbackGeneric);
+        Hotkeys.SWAP_INVENTORY_ROW.getKeybind().setCallback(callbackGeneric);
+        Hotkeys.SWAP_INVENTORY_ROW_REVERSE.getKeybind().setCallback(callbackGeneric);
+        Hotkeys.SWAP_INVENTORY_CUSTOM_ROW.getKeybind().setCallback(callbackGeneric);
 
 
     }
@@ -67,11 +72,25 @@ public class Callbacks implements IClientTickHandler {
         public boolean onKeyAction(KeyAction action, IKeybind key) {
 
             if (key == Hotkeys.OPEN_CONFIG_GUI.getKeybind()) {
+
                 GuiBase.openGui(new GuiConfig());
                 return true;
             }else if(key == Hotkeys.FAST_DISCONNECT.getKeybind()){
+
                 MinecraftClient mc = MinecraftClient.getInstance();
                 mc.player.world.disconnect();
+            } else if(key == Hotkeys.SWAP_INVENTORY_ROW.getKeybind()) {
+
+                MinecraftClient mc = MinecraftClient.getInstance();
+                InventorySwapRow.swapRouletteCurrent(mc, false);
+            } else if(key == Hotkeys.SWAP_INVENTORY_ROW_REVERSE.getKeybind()) {
+
+                MinecraftClient mc = MinecraftClient.getInstance();
+                InventorySwapRow.swapRouletteCurrent(mc, true);
+            } else if(key == Hotkeys.SWAP_INVENTORY_CUSTOM_ROW.getKeybind()) {
+
+                MinecraftClient mc = MinecraftClient.getInstance();
+                InventorySwapRow.swapCustomRow(mc);
             }
 
             return false;

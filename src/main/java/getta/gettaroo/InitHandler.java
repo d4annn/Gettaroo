@@ -13,7 +13,7 @@ public class InitHandler implements IInitializationHandler {
     @Override
     public void registerModHandlers() {
 
-        ConfigManager.getInstance().registerConfigHandler(References.MOD_ID, new Configs());
+        ConfigManager.getInstance().registerConfigHandler(Constants.MOD_ID, new Configs());
 
         InputEventHandler.getKeybindManager().registerKeybindProvider(InputHandler.getInstance());
         InputEventHandler.getInputManager().registerMouseInputHandler(InputHandler.getInstance());

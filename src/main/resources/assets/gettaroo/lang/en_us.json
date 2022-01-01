@@ -35,5 +35,11 @@
   "getta.gettaroo.label.direction.forward": "FORWARD",
   "getta.gettaroo.label.direction.back": "BACK",
   "getta.gettaroo.label.direction.right": "RIGHT",
-  "getta.gettaroo.label.direction.left": "LEFT"
+  "getta.gettaroo.label.direction.left": "LEFT",
+
+  "getta.gettaroo.row.default": "DEFAULT",
+  "getta.gettaroo.row.1": "ROW 1",
+  "getta.gettaroo.row.2": "ROW 2",
+  "getta.gettaroo.row.3": "ROW 3",
+  "getta.gettaroo.row.4": "ROW 4"
 }
