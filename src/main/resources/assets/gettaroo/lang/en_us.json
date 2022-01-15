@@ -13,7 +13,9 @@
   "getta.gettaroo.gui.button.config_gui.server": "Server",
   "getta.gettaroo.gui.button.config_gui.cheat_toggles": "Cheats Toggles",
   "getta.gettaroo.gui.button.config_gui.cheat_hotkeys": "Cheats Hotkeys",
-  "effect.gettaroo.fire": "Fire",
+  "getta.gettaroo.gui.button.config_gui.crafting_panel": "Crafting Panel",
+  "gettaroo.gui.title.crafting_panel": "Crafting Panel",
+  "gettaroo.gui.button.get_materials": "Calculate Materials",
 
   "getta.gettaroo.label.colors.light_purple": "LIGHT PURPLE",
   "getta.gettaroo.label.colors.blue": "BLUE",

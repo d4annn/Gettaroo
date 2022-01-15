@@ -29,7 +29,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigOptionList SCOREBOARD_OBJECTIVE_COLOR = new ConfigOptionList("scoreBoardObjectiveColor", ColorUtils.WHITE, "The color of the objective");
         public static final ConfigOptionList SCOREBOARD_SCORE_COLOR = new ConfigOptionList("scoreBoardScoreColor", ColorUtils.WHITE, "The color of the score");
         public static final ConfigOptionList CUSTOM_SWAP_ROW = new ConfigOptionList("customSwapRow", RowUtils.ROW_2, "The row you move set to default to use the other ones");
-
+        public static final ConfigDouble JETPACK_SPEED = new ConfigDouble("jetpackSpeed", 1, 1, 50, true, "Amount of jumps");
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
                 CLIENT_NAME,
@@ -37,7 +37,8 @@ public class Configs implements IConfigHandler {
                 AUTO_MOVEMENT_DIRECTION,
                 SCOREBOARD_OBJECTIVE_COLOR,
                 SCOREBOARD_SCORE_COLOR,
-                CUSTOM_SWAP_ROW
+                CUSTOM_SWAP_ROW,
+                JETPACK_SPEED
         );
     }
 

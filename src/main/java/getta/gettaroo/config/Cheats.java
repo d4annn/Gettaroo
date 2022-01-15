@@ -18,7 +18,8 @@ import getta.gettaroo.Gettaroo;
 public enum Cheats implements IHotkeyTogglable, IConfigNotifiable<IConfigBoolean> {
 
     SPIDER("spider", false, "", "You can climb walls"),
-    GIGAJUMP("gigaJump", false, "", "yes, fly"),
+    GIGAJUMP("gigaJump", false, "", "big jump"),
+    JETPACK("controlledJetpack", false, "", "Jumps without touching floor"),
     FALL_DAMAGE("removeFallDamage", false, "", "Removes the fall damage");
 
 

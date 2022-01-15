@@ -21,7 +21,12 @@
     "SlotMixin",
     "WorldRendererMixin",
     "EntityRenderDispatcherMixin",
-    "ItemEntityRendererMixin"
+    "ItemEntityRendererMixin",
+    "PigEntityRendererMixin",
+    "PigEntityRendererInterfaceMixin",
+    "HoglinEntityRendererInterface",
+    "HoglinEntityRendererMixin",
+    "ArmorFeatureRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

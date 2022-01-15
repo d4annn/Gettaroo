@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.config.ConfigType;
 import fi.dy.masa.malilib.config.ConfigUtils;
 import fi.dy.masa.malilib.config.IConfigBase;
+import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class GuiConfig extends GuiConfigsBase {
 
-    private static ConfigGuiTab tab = ConfigGuiTab.TOGGLES;
+    public static ConfigGuiTab tab = ConfigGuiTab.TOGGLES;
 
     public GuiConfig()
     {
@@ -30,6 +31,11 @@ public class GuiConfig extends GuiConfigsBase {
     @Override
     public void initGui()
     {
+
+        if(GuiConfig.tab == ConfigGuiTab.CRAFTING_PANEL) {
+            GuiBase.openGui(new CraftingPanelScreen());
+            return;
+        }
         super.initGui();
         this.clearOptions();
 
@@ -38,7 +44,11 @@ public class GuiConfig extends GuiConfigsBase {
 
         for (ConfigGuiTab tab : ConfigGuiTab.values())
         {
-            x += this.createButton(x, y, -1, tab);
+            if(!ConfigGuiTab.CRAFTING_PANEL.equals(tab)) {
+                x += this.createButton(x, y, -1, tab);
+            } else {
+                this.createButton(this.width - 95, this.height - 30, -1, tab);
+            }
         }
     }
 
@@ -67,6 +77,8 @@ public class GuiConfig extends GuiConfigsBase {
         else if (tab == ConfigGuiTab.SERVER ||tab == ConfigGuiTab.LISTS)
         {
             return 200;
+        } else if(tab == ConfigGuiTab.CRAFTING_PANEL) {
+
         }
 
         return super.getConfigWidth();
@@ -152,7 +164,8 @@ public class GuiConfig extends GuiConfigsBase {
         UTILS("getta.gettaroo.gui.button.config_gui.utils"),
         CHEAT_TOGGLES("getta.gettaroo.gui.button.config_gui.cheat_toggles"),
         CHEAT_HOTKEYS("getta.gettaroo.gui.button.config_gui.cheat_hotkeys"),
-        SERVER("getta.gettaroo.gui.button.config_gui.server");
+        SERVER("getta.gettaroo.gui.button.config_gui.server"),
+        CRAFTING_PANEL("getta.gettaroo.gui.button.config_gui.crafting_panel");
 
 
         private final String translationKey;

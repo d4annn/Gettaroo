@@ -14,6 +14,7 @@ import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
 import fi.dy.masa.malilib.util.StringUtils;
 import getta.gettaroo.Gettaroo;
+import getta.gettaroo.features.CarpinchoCallbackToggle;
 
 public enum FeatureToggle implements IHotkeyTogglable, IConfigNotifiable<IConfigBoolean>{
 
@@ -32,7 +33,10 @@ public enum FeatureToggle implements IHotkeyTogglable, IConfigNotifiable<IConfig
     NEAR_ENTITIES_RENDER("nearEntitiesRender", false, "", "Renders an icon of the nearest entities"),
     DISABLE_RENDERING_ENTITIES("disableRenderingSelectedEntities", false, "", "pito"),
     FIRE_BETTER_RENDER("betterFireRender", false, "", "Disables the fire render and adds a number for the time that you are in fire \n change the postion at utils"),
-    DISABLE_DAMAGE_SHAKE("disableDamageShake", false, "", "Disables the shake that you recieve when you take damage");
+    DISABLE_DAMAGE_SHAKE("disableDamageShake", false, "", "Disables the shake that you recieve when you take damage"),
+    PIGS_ARE_FAT_CARPINCHOS("pigFatCarpinchos", false, "", "Changes pigs texture for a carpincho texture"),
+    HOGLINS_ARE_FAT_CAPINCHOS("hoglinsFatCarpinchos", false, "", "Changes hoglins texture for a carpincho texture"),
+    DISABLE_ARMORS("disableArmorRendering", false, "", "Disables de rendering of the armors");
 
     private final String name;
     private final String comment;
@@ -48,24 +52,9 @@ public enum FeatureToggle implements IHotkeyTogglable, IConfigNotifiable<IConfig
         this(name, defaultValue, false, defaultHotkey, KeybindSettings.DEFAULT, comment);
     }
 
-    private FeatureToggle(String name, boolean defaultValue, boolean singlePlayer, String defaultHotkey, String comment)
-    {
-        this(name, defaultValue, singlePlayer, defaultHotkey, KeybindSettings.DEFAULT, comment);
-    }
-
-    private FeatureToggle(String name, boolean defaultValue, String defaultHotkey, KeybindSettings settings, String comment)
-    {
-        this(name, defaultValue, false, defaultHotkey, settings, comment);
-    }
-
     private FeatureToggle(String name, boolean defaultValue, boolean singlePlayer, String defaultHotkey, KeybindSettings settings, String comment)
     {
         this(name, defaultValue, singlePlayer, defaultHotkey, settings, comment, StringUtils.splitCamelCase(name.substring(5)));
-    }
-
-    private FeatureToggle(String name, boolean defaultValue, String defaultHotkey, String comment, String prettyName)
-    {
-        this(name, defaultValue, false, defaultHotkey, comment, prettyName);
     }
 
     private FeatureToggle(String name, boolean defaultValue, boolean singlePlayer, String defaultHotkey, String comment, String prettyName)
@@ -82,7 +71,11 @@ public enum FeatureToggle implements IHotkeyTogglable, IConfigNotifiable<IConfig
         this.comment = comment;
         this.prettyName = prettyName;
         this.keybind = KeybindMulti.fromStorageString(defaultHotkey, settings);
-        this.keybind.setCallback(new KeyCallbackToggleBooleanConfigWithMessage(this));
+        if(name.equals("fatCarpinchosPigs")) {
+            this.keybind.setCallback(new CarpinchoCallbackToggle(this));
+        } else {
+            this.keybind.setCallback(new KeyCallbackToggleBooleanConfigWithMessage(this));
+        }
     }
 
     @Override

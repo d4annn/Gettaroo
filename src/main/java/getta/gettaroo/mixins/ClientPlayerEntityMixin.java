@@ -1,15 +1,14 @@
 package getta.gettaroo.mixins;
 
+import getta.gettaroo.Constants;
+import getta.gettaroo.Gettaroo;
 import getta.gettaroo.config.Cheats;
 import getta.gettaroo.config.Configs;
 import getta.gettaroo.config.FeatureToggle;
 import getta.gettaroo.features.MovementSpeed;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.options.ControlsListWidget;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
@@ -64,12 +63,21 @@ public abstract class ClientPlayerEntityMixin {
     @Inject(method = "tickMovement", at = @At("HEAD"))
     public void spider(CallbackInfo ci){
 
+        if(Cheats.JETPACK.getBooleanValue()) {
+            if(client.player.input.jumping) {
+                int amount = (int) Configs.Utils.JETPACK_SPEED.getDoubleValue();
+                for(int i = 0; i < amount; i++) {
+                    client.player.jump();
+                }
+            }
+        }
+
         if(Cheats.GIGAJUMP.getBooleanValue()) {
             if (client.player.isFallFlying()) {
 
                 Vec3d velocity = client.player.getVelocity();
 
-                client.player.setVelocity(MovementSpeed.checkMovement(client.player).x, MovementSpeed.checkMovement(client.player).y, MovementSpeed.checkMovement(client.player).z );
+                client.player.setVelocity(velocity.x, MovementSpeed.checkMovement(client.player).y, velocity.z);
             }
         }
 
@@ -88,8 +96,41 @@ public abstract class ClientPlayerEntityMixin {
 
     }
 
+    boolean pig = false;
+    boolean didPig = false;
+    boolean hoglin = false;
+    boolean didHoglin = false;
+
     @Inject(method = "tickMovement", at = @At("HEAD"))
     public void removeFall(CallbackInfo ci){
+
+        if(FeatureToggle.PIGS_ARE_FAT_CARPINCHOS.getBooleanValue() && !pig) {
+            Gettaroo.shouldUpdate = true;
+            Identifier texture = new Identifier(Constants.MOD_ID, "textures/entity/carpincho.png");
+            PigEntityRendererInterfaceMixin.setTexture(texture);
+            pig = true;
+            didPig = false;
+        } else if(!FeatureToggle.PIGS_ARE_FAT_CARPINCHOS.getBooleanValue() && !didPig) {
+            pig = false;
+            didPig = true;
+            Gettaroo.shouldUpdate = true;
+            Identifier texture = new Identifier("textures/entity/pig/pig.png");
+            PigEntityRendererInterfaceMixin.setTexture(texture);
+        }
+
+        if(FeatureToggle.HOGLINS_ARE_FAT_CAPINCHOS.getBooleanValue() && !hoglin) {
+            Gettaroo.shouldUpdate = true;
+            Identifier texture = new Identifier(Constants.MOD_ID, "textures/entity/carpincho.png");
+            HoglinEntityRendererInterface.setTexture(texture);
+            hoglin = true;
+            didHoglin = false;
+        } else if(!FeatureToggle.HOGLINS_ARE_FAT_CAPINCHOS.getBooleanValue() && !didHoglin) {
+            hoglin = false;
+            didHoglin = true;
+            Gettaroo.shouldUpdate = true;
+            Identifier texture = new Identifier("textures/entity/hoglin/hoglin.png");
+            HoglinEntityRendererInterface.setTexture(texture);
+        }
 
         if(Cheats.FALL_DAMAGE.getBooleanValue()) {
 
