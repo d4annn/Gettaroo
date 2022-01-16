@@ -78,10 +78,10 @@ public void waterTrolling(CallbackInfoReturnable<Boolean> cir){
         for(String block1 : Configs.Server.INSTA_MINE_BLOCKS.getStrings()){
             if (block.isOf(Registry.BLOCK.get(new Identifier(block1)))) {
 
-                float f = mc.player.inventory.getBlockBreakingSpeed(block);
+                float f = mc.player.getInventory().getBlockBreakingSpeed(block);
                 if (f > 1.0F) {
                     int i = EnchantmentHelper.getEfficiency(mc.player);
-                    ItemStack itemStack = mc.player.inventory.getMainHandStack();
+                    ItemStack itemStack = mc.player.getInventory().getMainHandStack();
                     if (i > 0 && !itemStack.isEmpty()) {
                         f += ((float)(i * i + 1)) * 70;
                     }

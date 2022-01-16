@@ -4,7 +4,6 @@
   "package": "getta.gettaroo.mixins",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "ClientBrandRetrieverMixin",
     "ClientPlayerEntityMixin",
     "EnderPearlItemMixin",
     "EntityMixin",

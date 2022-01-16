@@ -19,7 +19,7 @@ public class EnderPearlItemMixin {
     @Inject(method = "use", at = @At("TAIL"), cancellable = true)
     public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir){
         if(Configs.Server.ENDERPEARL_NO_COOLDOWN.getBooleanValue()) {
-            user.getItemCooldownManager().remove(user.inventory.getMainHandStack().getItem());
+            user.getItemCooldownManager().remove(user.getInventory().getMainHandStack().getItem());
         }
     }
 }

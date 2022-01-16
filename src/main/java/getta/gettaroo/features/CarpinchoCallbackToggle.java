@@ -9,9 +9,9 @@ import getta.gettaroo.Gettaroo;
 import getta.gettaroo.config.FeatureToggle;
 import getta.gettaroo.mixins.HoglinEntityRendererInterface;
 import getta.gettaroo.mixins.PigEntityRendererInterfaceMixin;
-import getta.gettaroo.mixins.PigEntityRendererMixin;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.resource.ResourceReloadLogger;
 import net.minecraft.util.Identifier;
-import org.lwjgl.system.CallbackI;
 
 public class CarpinchoCallbackToggle extends KeyCallbackToggleBoolean {
 
@@ -23,7 +23,6 @@ public class CarpinchoCallbackToggle extends KeyCallbackToggleBoolean {
     public boolean onKeyAction(KeyAction action, IKeybind key) {
         super.onKeyAction(action, key);
 
-        Gettaroo.shouldUpdate = true;
         Identifier texture = new Identifier("textures/entity/pig/pig.png");
 
         if(FeatureToggle.PIGS_ARE_FAT_CARPINCHOS.getBooleanValue() ) {
@@ -31,6 +30,8 @@ public class CarpinchoCallbackToggle extends KeyCallbackToggleBoolean {
         }
 
         PigEntityRendererInterfaceMixin.setTexture(texture);
+      //  MinecraftClient.getInstance().worldRenderer.reload();
+        MinecraftClient.getInstance().getEntityModelLoader().reload(MinecraftClient.getInstance().getResourceManager());
         texture = new Identifier("textures/entity/hoglin/hoglin.png");
 
         if(FeatureToggle.HOGLINS_ARE_FAT_CAPINCHOS.getBooleanValue() ) {
@@ -38,6 +39,7 @@ public class CarpinchoCallbackToggle extends KeyCallbackToggleBoolean {
         }
 
         HoglinEntityRendererInterface.setTexture(texture);
+
 
         return true;
     }

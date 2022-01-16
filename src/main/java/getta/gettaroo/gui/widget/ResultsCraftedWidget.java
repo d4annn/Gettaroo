@@ -58,8 +58,6 @@ public class ResultsCraftedWidget extends WidgetBase {
     public void render(int mouseX, int mouseY, boolean selected, MatrixStack matrixStack) {
 
         RenderUtils.color(1f, 1f, 1f, 1f);
-        RenderSystem.pushMatrix();
-        RenderSystem.translatef(0, 0, 1);
 
         RenderUtils.drawOutlinedBox(this.x, this.y, this.width, this.height + 4, 0xA0000000, GuiBase.COLOR_HORIZONTAL_BAR);
 
@@ -140,8 +138,6 @@ public class ResultsCraftedWidget extends WidgetBase {
                 }
             }
         }
-
-        RenderSystem.popMatrix();
     }
 
     public void clearResults() {

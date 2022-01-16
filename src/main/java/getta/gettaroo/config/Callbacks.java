@@ -10,9 +10,8 @@ import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
 import getta.gettaroo.features.InventorySwapRow;
 import getta.gettaroo.gui.GuiConfig;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.options.KeyBinding;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.screen.slot.SlotActionType;
 
 public class Callbacks implements IClientTickHandler {
 
@@ -77,8 +76,7 @@ public class Callbacks implements IClientTickHandler {
                 return true;
             }else if(key == Hotkeys.FAST_DISCONNECT.getKeybind()){
 
-                MinecraftClient mc = MinecraftClient.getInstance();
-                mc.player.world.disconnect();
+                MinecraftClient.getInstance().disconnect();
             } else if(key == Hotkeys.SWAP_INVENTORY_ROW.getKeybind()) {
 
                 MinecraftClient mc = MinecraftClient.getInstance();

@@ -32,7 +32,7 @@ public abstract class ClientPlayerEntityMixin {
 
         for (String item : Configs.Lists.PREVENT_DROPPING_LIST.getStrings()) {
 
-            if (Registry.ITEM.getId(client.player.inventory.getStack(client.player.inventory.selectedSlot).getItem()).equals(new Identifier(item))) {
+            if (Registry.ITEM.getId(client.player.getInventory().getStack(client.player.getInventory().selectedSlot).getItem()).equals(new Identifier(item))) {
 
                 cir.cancel();
             }
@@ -141,7 +141,7 @@ public abstract class ClientPlayerEntityMixin {
                     && !isFallingFastEnoughToCauseDamage(player))
                 return;
 
-            player.networkHandler.sendPacket(new PlayerMoveC2SPacket(true));
+            player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(true));
         }
     }
 

@@ -71,11 +71,7 @@ public enum FeatureToggle implements IHotkeyTogglable, IConfigNotifiable<IConfig
         this.comment = comment;
         this.prettyName = prettyName;
         this.keybind = KeybindMulti.fromStorageString(defaultHotkey, settings);
-        if(name.equals("fatCarpinchosPigs")) {
-            this.keybind.setCallback(new CarpinchoCallbackToggle(this));
-        } else {
-            this.keybind.setCallback(new KeyCallbackToggleBooleanConfigWithMessage(this));
-        }
+        this.keybind.setCallback(new KeyCallbackToggleBooleanConfigWithMessage(this));
     }
 
     @Override

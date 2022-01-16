@@ -211,7 +211,7 @@ public class ItemsWidget extends WidgetBase {
         }
 
         Recipe<?> finalRecipe = recipe.get();
-        List<CraftingPanelItemOutput> itemsOfRecipe = getIngredients(finalRecipe.getPreviewInputs());
+        List<CraftingPanelItemOutput> itemsOfRecipe = getIngredients(finalRecipe.getIngredients());
 
         return itemsOfRecipe;
     }
@@ -241,7 +241,7 @@ public class ItemsWidget extends WidgetBase {
     //Provided by akali, he's the best
     private static CraftingPanelItemOutput itemFromIngredient(Ingredient ingredient) {
 
-        ItemStack[] itemStackOfIngredient = ingredient.getMatchingStacksClient();
+        ItemStack[] itemStackOfIngredient = ingredient.getMatchingStacks();
 
         if(itemStackOfIngredient.length == 0) {
 
@@ -304,7 +304,7 @@ public class ItemsWidget extends WidgetBase {
     public void addToList() {
 
         if(this.selectedItem != null) {
-            String pito = this.selectedItem.getDefaultStack().getTag() != null ? this.selectedItem.getDefaultStack().getTag().asString() : this.selectedItem.getDefaultStack().getName().getString();
+            String pito = this.selectedItem.getDefaultStack().getNbt() != null ? this.selectedItem.getDefaultStack().getNbt().asString() : this.selectedItem.getDefaultStack().getName().getString();
 
             CraftingPanelItemOutput addingItem = new CraftingPanelItemOutput();
             addingItem.setName(getItemStackName(this.selectedItem.getDefaultStack()));
@@ -348,8 +348,6 @@ public class ItemsWidget extends WidgetBase {
     public void render(int mouseX, int mouseY, boolean selected, MatrixStack matrixStack) {
 
         RenderUtils.color(1f, 1f, 1f, 1f);
-        RenderSystem.pushMatrix();
-        RenderSystem.translatef(0, 0, 1);
 
         Screen screen = this.mc.currentScreen;
 
@@ -475,8 +473,6 @@ public class ItemsWidget extends WidgetBase {
         int x = this.x + this.width - this.scrollbarWidth - 1;
         int y = this.y + 1;
         this.scrollBar.render(mouseX, mouseY, 0, x, y, this.scrollbarWidth, this.height -1, this.height * 4);
-
-        RenderSystem.popMatrix();
     }
 
     protected static class TextFieldListener implements ITextFieldListener<GuiTextFieldGeneric> {
