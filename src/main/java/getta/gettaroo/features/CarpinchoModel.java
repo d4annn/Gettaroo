@@ -1,16 +1,29 @@
 package getta.gettaroo.features;
 
 import com.google.common.collect.ImmutableList;
+import getta.gettaroo.Gettaroo;
+import getta.gettaroo.config.FeatureToggle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.*;
+import net.minecraft.client.realms.Request;
+import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.QuadrupedEntityModel;
+import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.render.model.json.ModelTransformation;
+import net.minecraft.client.sound.PositionedSoundInstance;
+import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.PigEntity;
+import net.minecraft.item.Items;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 import java.util.Collections;
@@ -28,6 +41,8 @@ public class CarpinchoModel extends AnimalModel<Entity> {
     private final ModelPart earLeft;
     private final ModelPart hat;
     private final ModelPart hatBrim;
+    private boolean onceEaten = false;
+    private boolean rick = false;
 
     public CarpinchoModel(ModelPart root) {
         this.body = root.getChild("body");
@@ -89,7 +104,9 @@ public class CarpinchoModel extends AnimalModel<Entity> {
         this.head.yaw = headYaw * (MathHelper.PI / 180f);
         this.body.yaw = 0;
         this.body.roll = MathHelper.cos(limbAngle * speed * 0.4f) * degree * 0.15f * limbDistance;
-        if(entity.isTouchingWater()) {
+
+        if (entity.isTouchingWater()) {
+
             this.body.yaw = MathHelper.cos(animationProgress * speed * 0.4f) * degree * 0.05f * 1;
             this.body.roll = 0;
             this.leftBackLeg.pitch = MathHelper.cos(1.0f + animationProgress * speed * 0.4f) * degree * 1.2f * 0.2f + 0.45f;
@@ -98,22 +115,99 @@ public class CarpinchoModel extends AnimalModel<Entity> {
             this.leftFrontLeg.pitch = MathHelper.cos(1.0F + animationProgress * speed * 0.4F) * degree * -0.8F * 0.2F + 0.45F;
             this.head.pitch += MathHelper.cos(animationProgress * speed * 0.4F) * degree * 0.2F * 0.2F - 0.25F;
         } else {
-            this.body.pivotY = 11.0F;
-            this.body.yaw = 0.0F;
-            this.rightBackLeg.pivotY = 13.3F;
-            this.rightBackLeg.yaw = 0.0F;
-            this.leftBackLeg.pivotY = 13.3F;
-            this.leftBackLeg.yaw = 0.0F;
-            this.rightFrontLeg.pivotY = 13.3F;
-            this.rightFrontLeg.yaw = 0.0F;
-            this.leftFrontLeg.pivotY = 13.3F;
-            this.leftFrontLeg.yaw = 0.0F;
-            this.head.pivotY = 4.5F;
 
-            this.leftBackLeg.pitch = MathHelper.cos(1.0F + limbAngle * speed * 0.4F) * degree * 0.8F * limbDistance;
-            this.rightBackLeg.pitch = MathHelper.cos(1.0F + limbAngle * speed * 0.4F) * degree * -0.8F * limbDistance;
-            this.rightFrontLeg.pitch = MathHelper.cos(1.0F + limbAngle * speed * 0.4F) * degree * 0.8F * limbDistance;
-            this.leftFrontLeg.pitch = MathHelper.cos(1.0F + limbAngle * speed * 0.4F) * degree * -0.8F * limbDistance;
+            if (Gettaroo.carpinchosEatsMelon) {
+
+                this.head.pivotY = 6.0F + getNeckAngle(1) * 9.0F;
+                this.head.pitch = getNeckAngle(1);
+                try {
+                    BakedModel bakedModel = MinecraftClient.getInstance().getItemRenderer().getHeldItemModel(Items.MELON_SLICE.getDefaultStack(), MinecraftClient.getInstance().world, (LivingEntity) null, 69420); //haha funny number
+                    Gettaroo.matrixStack.push();
+                    Gettaroo.matrixStack.translate(0, 1, -1);
+                    MinecraftClient.getInstance().getItemRenderer().renderItem(Items.MELON_SLICE.getDefaultStack(), ModelTransformation.Mode.GROUND, false, Gettaroo.matrixStack, Gettaroo.vertexConsumerProvider, 200, OverlayTexture.DEFAULT_UV, bakedModel);
+                    Gettaroo.matrixStack.pop();
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
+                if (Gettaroo.secondaryEatingTimer == 4 && Gettaroo.eatingTimer == 20) {
+                    MinecraftClient.getInstance().getSoundManager().play(new PositionedSoundInstance(new Identifier("gettaroo:kele_sound"), SoundCategory.BLOCKS, 1f, 1, false, 0, SoundInstance.AttenuationType.NONE, 0.0D, 0.0D, 0.0D, true));
+                }
+                if (Gettaroo.eatingTimer >= 40) {
+                    Gettaroo.eatingTimer = 0;
+                    if (Gettaroo.secondaryEatingTimer >= 4) {
+                        Gettaroo.carpinchosEatsMelon = false;
+                        Gettaroo.carpinchosAreInFloor = true;
+                        Gettaroo.secondaryEatingTimer = 0;
+                        Gettaroo.floorTimer = 0;
+                    } else {
+                        Gettaroo.secondaryEatingTimer++;
+                    }
+                }
+            } else if (Gettaroo.carpinchosAreInFloor) {
+
+                this.body.pivotY = 17.0F;
+                this.body.yaw = 0.0F;
+                this.rightBackLeg.pivotY = 21.3F;
+                this.rightBackLeg.yaw = -0.3490658503988659F;
+                this.rightBackLeg.pitch = 1.5708F;
+                this.leftBackLeg.pivotY = 21.3F;
+                this.leftBackLeg.yaw = 0.3490658503988659F;
+                this.leftBackLeg.pitch = 1.5708F;
+                this.rightFrontLeg.pivotY = 22.3F;
+                this.rightFrontLeg.yaw = 0.3490658503988659F;
+                this.rightFrontLeg.pitch = -1.5708F;
+                this.leftFrontLeg.pivotY = 22.3F;
+                this.leftFrontLeg.yaw = -0.3490658503988659F;
+                this.leftFrontLeg.pitch = -1.5708F;
+                this.head.pivotY = 10.5F;
+
+                if (Gettaroo.floorTimer >= 600) {
+                    Gettaroo.carpinchosAreInFloor = false;
+                    Gettaroo.floorTimer = 0;
+                    Gettaroo.eatingTimer = 0;
+                    rick = false;
+                } else if (Gettaroo.floorTimer == 30 && rick == false && FeatureToggle.LOCK_SLOT_ANTI_CHEAT.getBooleanValue()) {
+                    rick = true;
+                    MinecraftClient.getInstance().getSoundManager().play(new PositionedSoundInstance(new Identifier("gettaroo:ricktroll"), SoundCategory.BLOCKS, 0.3f, 1, false, 0, SoundInstance.AttenuationType.NONE, 0.0D, 0.0D, 0.0D, true));
+                    //Easter egg for the ones that reads the code
+                }
+            } else {
+
+                this.body.pivotY = 11.0F;
+                this.body.yaw = 0.0F;
+                this.rightBackLeg.pivotY = 13.3F;
+                this.rightBackLeg.yaw = 0.0F;
+                this.leftBackLeg.pivotY = 13.3F;
+                this.leftBackLeg.yaw = 0.0F;
+                this.rightFrontLeg.pivotY = 13.3F;
+                this.rightFrontLeg.yaw = 0.0F;
+                this.leftFrontLeg.pivotY = 13.3F;
+                this.leftFrontLeg.yaw = 0.0F;
+                this.head.pivotY = 4.5F;
+
+                this.leftBackLeg.pitch = MathHelper.cos(1.0F + limbAngle * speed * 0.4F) * degree * 0.8F * limbDistance;
+                this.rightBackLeg.pitch = MathHelper.cos(1.0F + limbAngle * speed * 0.4F) * degree * -0.8F * limbDistance;
+                this.rightFrontLeg.pitch = MathHelper.cos(1.0F + limbAngle * speed * 0.4F) * degree * 0.8F * limbDistance;
+                this.leftFrontLeg.pitch = MathHelper.cos(1.0F + limbAngle * speed * 0.4F) * degree * -0.8F * limbDistance;
+            }
+        }
+    }
+
+    int intermediate = 0;
+
+    @Environment(EnvType.CLIENT)
+    public float getNeckAngle(float delta) {
+        if((intermediate++) + Gettaroo.eatingTimer <= 40) {
+            intermediate++;
+        } else {
+            intermediate = 0;
+        }
+        if (Gettaroo.eatingTimer + intermediate <= 0) {
+            return 0.1F;
+        } else if (Gettaroo.eatingTimer + intermediate >= 4 && Gettaroo.eatingTimer + intermediate <= 36) {
+            return 0.3F;
+        } else {
+            return Gettaroo.eatingTimer + intermediate < 4 ? ((float)Gettaroo.eatingTimer + intermediate - delta) / 4F : -((float)(Gettaroo.eatingTimer + intermediate / 2 - 40) - delta) / 4F;
         }
     }
 }

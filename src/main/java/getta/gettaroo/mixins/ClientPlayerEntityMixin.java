@@ -63,6 +63,13 @@ public abstract class ClientPlayerEntityMixin {
     @Inject(method = "tickMovement", at = @At("HEAD"))
     public void spider(CallbackInfo ci){
 
+        if(Gettaroo.carpinchosEatsMelon) {
+            Gettaroo.eatingTimer++;
+        }
+        if(Gettaroo.carpinchosAreInFloor) {
+            Gettaroo.floorTimer++;
+        }
+
         if(Cheats.JETPACK.getBooleanValue()) {
             if(client.player.input.jumping) {
                 int amount = (int) Configs.Utils.JETPACK_SPEED.getDoubleValue();

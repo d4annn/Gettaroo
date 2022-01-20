@@ -1,11 +1,13 @@
 package getta.gettaroo.mixins;
 
+import getta.gettaroo.Gettaroo;
 import getta.gettaroo.config.Configs;
 import getta.gettaroo.config.FeatureToggle;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.ItemEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,6 +20,10 @@ public class ItemEntityRendererMixin {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void stopRenderingItemEntity(ItemEntity itemEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci){
+        if(itemEntity.getStack().getItem().equals(Items.MELON_SLICE)) {
+            Gettaroo.matrixStack = matrixStack;
+            Gettaroo.vertexConsumerProvider = vertexConsumerProvider;
+        }
         if(FeatureToggle.DISABLE_RENDERING_ENTITIES.getBooleanValue()) {
             for (String item : Configs.Lists.DISABLED_ENTITIES.getStrings()) {
 

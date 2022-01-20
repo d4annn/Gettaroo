@@ -1,0 +1,13 @@
+{
+  "kele_sound": {
+    "subtitle": "subtitles.gettaroo.kele_sound",
+    "sounds": [
+      "gettaroo:kele_sound"
+    ]
+  },
+  "ricktroll": {
+    "sounds": [
+      "gettaroo:ricktroll"
+    ]
+  }
+}

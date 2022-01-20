@@ -25,7 +25,8 @@
     "PigEntityRendererInterfaceMixin",
     "HoglinEntityRendererInterface",
     "HoglinEntityRendererMixin",
-    "ArmorFeatureRendererMixin"
+    "ArmorFeatureRendererMixin",
+    "AnimalEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
