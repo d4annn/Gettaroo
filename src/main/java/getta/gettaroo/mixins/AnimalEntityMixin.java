@@ -1,7 +1,6 @@
 package getta.gettaroo.mixins;
 
 import getta.gettaroo.Gettaroo;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,9 +20,8 @@ public class AnimalEntityMixin {
     private void carpinchoBreed(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         if((Object)this instanceof PigEntity && !Gettaroo.carpinchosAreInFloor) {
             ItemStack itemStack = player.getStackInHand(hand);
-            if(itemStack.getItem().equals(Items.MELON_SLICE) && itemStack.getCount() > 1) {
+            if(itemStack.getItem().equals(Items.MELON_SLICE) && itemStack.getCount() >= 1) {
                 Gettaroo.carpinchosEatsMelon = true;
-                MinecraftClient.getInstance().player.dropSelectedItem(false);
             }
         }
     }

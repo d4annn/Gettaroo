@@ -1,5 +1,6 @@
 package getta.gettaroo.mixins;
 
+import getta.gettaroo.Gettaroo;
 import getta.gettaroo.config.Configs;
 import getta.gettaroo.config.FeatureToggle;
 
@@ -40,6 +41,8 @@ public abstract class InGameHudMixin extends DrawableHelper {
 
     @Inject(method = "render", at = @At("TAIL"))
     private void renderDurationOverlay(MatrixStack matrices, float tickDelta, CallbackInfo ci){
+
+        Gettaroo.matrixStack = matrices;
 
         int x = 923;
         int y = 9;

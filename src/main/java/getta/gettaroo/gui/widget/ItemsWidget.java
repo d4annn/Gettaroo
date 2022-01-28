@@ -83,11 +83,12 @@ public class ItemsWidget extends WidgetBase {
             }
 
             this.scrollBar.setValue(0);
-
-            this.itemsWithFilter = new ArrayList<>();
         }
 
         if(shouldFilter) {
+
+            this.itemsWithFilter = new ArrayList<>();
+
             for (Item item : Registry.ITEM) {
 
                 if (applySearch(item)) {

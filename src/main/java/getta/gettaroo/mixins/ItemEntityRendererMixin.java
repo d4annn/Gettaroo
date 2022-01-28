@@ -20,10 +20,6 @@ public class ItemEntityRendererMixin {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void stopRenderingItemEntity(ItemEntity itemEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci){
-        if(itemEntity.getStack().getItem().equals(Items.MELON_SLICE)) {
-            Gettaroo.matrixStack = matrixStack;
-            Gettaroo.vertexConsumerProvider = vertexConsumerProvider;
-        }
         if(FeatureToggle.DISABLE_RENDERING_ENTITIES.getBooleanValue()) {
             for (String item : Configs.Lists.DISABLED_ENTITIES.getStrings()) {
 

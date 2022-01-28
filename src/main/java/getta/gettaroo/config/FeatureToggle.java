@@ -36,7 +36,8 @@ public enum FeatureToggle implements IHotkeyTogglable, IConfigNotifiable<IConfig
     DISABLE_DAMAGE_SHAKE("disableDamageShake", false, "", "Disables the shake that you recieve when you take damage"),
     PIGS_ARE_FAT_CARPINCHOS("pigFatCarpinchos", false, "", "Changes pigs texture for a carpincho texture"),
     HOGLINS_ARE_FAT_CAPINCHOS("hoglinsFatCarpinchos", false, "", "Changes hoglins texture for a carpincho texture"),
-    DISABLE_ARMORS("disableArmorRendering", false, "", "Disables de rendering of the armors");
+    DISABLE_ARMORS("disableArmorRendering", false, "", "Disables de rendering of the armors"),
+    IMAGE_HOVER_PREVIEW("imageHoverPrevie", false, "", "When you hover a link in chat shows you the image");
 
     private final String name;
     private final String comment;
